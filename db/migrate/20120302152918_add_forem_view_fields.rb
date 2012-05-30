@@ -7,6 +7,8 @@ class AddForemViewFields < ActiveRecord::Migration
 
     Forem::Topic.find_each do |topic|
       topic.update_column(:views_count, topic.views.sum(:count))
+      topic.update_column(:current_viewed_at, Time.now)
+      topic.update_column(:past_viewed_at, Time.now)
     end
 
     Forem::Forum.find_each do |forum|
